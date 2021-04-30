@@ -1,13 +1,8 @@
 /**
-     *  “Experience is the name everyone gives to their mistakes.” – Oscar Wilde
-     *
-     *  Prodip Datta
-     *  Dept. Of Computer Science & Engineering
-     *  Session: 2014-15
-     *  email  : prodipdatta7@gmail.com
-     *  Bangabandhu Sheikh Mujibur Rahman Science & Technology University, Gopalganj-8100.
-     *
-     *  created : Friday 30-April, 2021  10:44:41 AM
+ *  “Experience is the name everyone gives to their mistakes.” – Oscar Wilde
+ *
+ *  author  :   prodipdatta7
+ *  created :   Wednesday 15-April, 2020  10:05:57 AM
 **/
 
 //#include <bits/stdc++.h>
@@ -31,11 +26,6 @@
 #include <assert.h>
 #include <new>
 #include <sstream>
-#include <time.h>
-#include <functional>
-#include <numeric>
-#include <utility>
-#include <limits>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 
@@ -49,12 +39,11 @@ using namespace __gnu_pbds ;
 #define     ll          long long
 #define     ld          long double
 #define     ull         unsigned long long
-#define     pii         pair< int, int >
-#define     pll         pair< ll, ll >
-#define     vi          vector< int >
-#define     vll         vector< ll >
-#define     vvi         vector< vector< int > >
-#define     vvii         vector< vector< pii > >
+#define     pii         pair<int,int>
+#define     pll         pair<ll,ll>
+#define     vi          vector<int>
+#define     vll         vector<ll>
+#define     vvi         vector<vector<int>>
 #define     debug(x)    cerr << #x << " = " << x << '\n' ;
 #define     rep(i,b,e)  for(__typeof(e) i = (b) ; i != (e + 1) - 2 * ((b) > (e))  ; i += 1 - 2 * ((b) > (e)))
 #define     all(x)      x.begin() , x.end()
@@ -69,14 +58,13 @@ using namespace __gnu_pbds ;
 #define     fread       freopen("input.txt","r",stdin)
 #define     fwrite      freopen("output.txt","w",stdout)
 #define     TN          typename
-#define     FastIO      ios_base::sync_with_stdio(false) ; cin.tie(NULL) ; cout.tie(NULL) ;
 
-typedef tree <pii, null_type, less< pii >, rb_tree_tag, tree_order_statistics_node_update > ordered_set;
-typedef tree <pii, null_type, less_equal< pii >, rb_tree_tag, tree_order_statistics_node_update > ordered_multiset;
+typedef tree <int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update > ordered_set;
+typedef tree <int, null_type, less_equal<int>, rb_tree_tag, tree_order_statistics_node_update > ordered_multiset;
 
-/*
-Note :  There is a problem with erase() function in ordered_multiset (for less_equal<int> tag).
-        lower_bound() works as upper_bound() and vice-versa.
+/* 
+Note :  There is a problem with erase() function in ordered_multiset (for less_equal<int> tag). 
+        lower_bound() works as upper_bound() and vice-versa. 
         Be careful to use.
         i) find_by_order(k) : kth smallest element counting from 0 .
         ii) order_of_key(k) : number of elements strictly smaller than k.
@@ -95,12 +83,9 @@ template < TN T, TN T1 > inline void Int(T &a, T1 &b) {Int(a), Int(b) ;}
 template < TN T, TN T1, TN T2 > inline void Int(T &a, T1 &b, T2 &c) {Int(a, b), Int(c) ;}
 template < TN T, TN T1, TN T2, TN T3 > inline void Int(T &a, T1 &b, T2 &c, T3 &d) {Int(a, b), Int(c, d) ;}
 template < TN T, TN T1, TN T2, TN T3, TN T4> inline void Int(T &a, T1 &b, T2 &c, T3 &d, T4 &e) {Int(a, b), Int(c, d, e) ;}
-template<typename T, typename U> inline void cmin(T &x, U y) { if (y < x) x = y; }
-template<typename T, typename U> inline void cmax(T &x, U y) { if (x < y) x = y; }
 
 /*###############-> Debugger <-###############*/
 
-#ifdef LOCAL
 #define error(args...) { string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); err(_it, args); }
 void err(istream_iterator<string> it) {cout << endl ;}
 template<TN T, TN... Args>
@@ -108,14 +93,11 @@ void err(istream_iterator<string> it, T a, Args... args) {
     cerr << *it << " = " << a << ' ' ;
     err(++it, args...);
 }
-#else
-#define error(args...)
-#endif
 
 template<class ValueType>
-void unstable_remove(
-        typename std::vector<ValueType>& container,
-        typename std::vector<ValueType>::iterator it
+bool unstable_remove(
+    typename std::vector<ValueType>& container,
+    typename std::vector<ValueType>::iterator it
 ) {
     auto lastEl = container.end() - 1;
     if (it != lastEl) {
@@ -130,7 +112,7 @@ void unstable_remove(
 Moves : L, U, R, D, LU, RU, RD, LD.
 ******************************************/
 int dx[8] = {0, -1, 0, 1, -1, -1, 1, 1} ;
-int dy[8] = { -1, 0, 1, 0, -1, 1, 1, -1} ;
+int dy[8] = {-1, 0, 1, 0, -1, 1, 1, -1} ;
 
 /*###############-> Constraints <-###############*/
 
@@ -140,8 +122,6 @@ const ll  Mod        = (ll)1e9 + 7 ;
 const int inf        = (int)2e9 ;
 const ll  Inf        = (ll)1e18 ;
 const int mod        = (int)1e9 + 7 ;
-const double EPS     = (double)1e-9 ;
-const double PI      = (double)acos(-1.0) ;
 
 
 inline int add(int a, int b, int mod) {a += b ; return a >= mod ? a - mod : a ;}
@@ -150,64 +130,92 @@ inline int mul(int a, int b, int mod) {return (ll)a * b % mod ;}
 
 /*...... ! Code starts from here ! ......*/
 
-vector < int > g[53] ; 
-string codeward[26] ;
-int vis[55] ;
 
-void dfs(int s, string code) {
-    if(s < 26){
-        codeward[s] = code ; 
-        return ;
-    }
-    dfs(g[s][0], code + '0') ; 
-    dfs(g[s][1], code + '1') ;
+struct point{
+	int x, y ; 
+	point(int _ = 0, int __ = 0) :
+		x(_), y(__) {}
+} ;
+
+point p[N] ;
+
+double dist(point a, point b){
+	return sqrt(((a.x - b.x) * (a.x - b.x)) + ((a.y - b.y) * (a.y - b.y))) ;
+} 
+
+double bruteforce(point p[], int n){
+	double res = 1.0 * Inf ;
+	for(int i = 0 ; i < n ; ++i){
+		for(int j = i + 1 ; j < n ; ++j){
+			res = min(res, dist(p[i], p[j])) ;
+		}
+	}
+	return res ; 
+}
+
+double stripClosest(point strip[], int n, double d){
+	double res = d ; 
+	for(int i = 0 ; i < n ; ++i){
+		for(int j = i + 1 ; j < n and (strip[j].y - strip[i].y) < res ; ++j){
+			res = min(res, dist(strip[i], strip[j])) ;
+		}
+	}
+	return res ; 
+}
+
+double DivideAndConquer(point px[], point py[], int n){
+	if(n <= 3)
+		return bruteforce(px, n) ;
+	int mid = n / 2 ; 
+	point midPoint = px[mid] ; 
+	point pyl[mid + 1], pyr[n - mid - 1] ; 
+	int l = 0 , r = 0 ; 
+	for(int i = 0 ; i < n ; ++i){
+		if(py[i].x < midPoint.x)
+			pyl[l++] = py[i] ; 
+		else pyr[r++] = py[i] ; 
+	}
+	double d1 = DivideAndConquer(px, pyl, mid) ;
+	double d2 = DivideAndConquer(px + mid, pyr, n - mid) ; 
+	double d = min(d1, d2) ; 
+	point strip[n] ;
+	int j = 0 ;
+	for(int i = 0 ; i < n ; ++i){
+		if(abs(py[i].x - midPoint.x) < d)
+			strip[j++] = py[i] ; 
+	}
+	return min(d, stripClosest(strip, j, d)) ;
+}
+
+
+double closest(point p[], int n){
+	point px[n], py[n] ; 
+	for(int i = 0 ; i < n ; ++i){
+		px[i] = py[i] = p[i] ;
+	}
+	sort(px, px + n, [](point x, point y){
+		return x.x < y.x ;
+	}) ;
+	sort(py, py + n, [](point x, point y){
+		return x.y < y.y ;
+	}) ;
+
+	return DivideAndConquer(px, py, n) ;
 }
 
 int main() {
-#ifdef LOCAL
-    clock_t tStart = clock();
-    //freopen("input.txt", "r", stdin) ;
-    //freopen("output.txt", "w", stdout) ;
-#endif
+    // ios_base::sync_with_stdio(false) ;
+    // cin.tie(NULL) ; cout.tie(NULL) ;
     int test = 1 , tc = 0 ;
-    // Int(test) ;
+    //Int(test) ;
     while (test--) {
         int n ; Int(n) ; 
-        string s ; 
-        cin >> s ; 
-        vector < int > cnt(26, 0) ;
-        for(int i = 0; i < n; ++i) {
-            cnt[s[i] - 'A']++ ; 
+        for(int i = 0, x, y ; i < n ; ++i){
+        	Int(x, y) ;
+        	p[i] = point(x, y) ; 
         }
-        priority_queue < pii > pq ; 
-        for(int i = 0 ; i < 26 ; ++i) {
-            if(cnt[i])pq.push({-cnt[i], i}) ;
-        }
-        int node = 26 ; 
-        while(pq.size() > 1) {
-            pii cur1 = pq.top() ; 
-            pq.pop() ;
-            pii cur2 = pq.top() ;
-            pq.pop() ; 
-            int sum = cur1.first + cur2.first ; 
-            g[node].push_back(cur1.second) ; 
-            g[node].push_back(cur2.second) ; 
-            pq.push({sum, node}) ;
-            ++node ; 
-        }
-        --node;
-        dfs(node, "") ;
-        for(int i = 0 ; i < 26 ; ++i){
-            if(cnt[i] > 0)cout << (char)(i + 'A') << ' ' << codeward[i] << '\n' ; 
-        }
-        for(int i = 0 ; i < n ; ++i){
-            cout << codeward[s[i] - 'A'] ; 
-        }
-        cout << '\n' ; 
+        double res = closest(p, n) ; 
+        printf("%.3f\n",res);
     }
-
-#ifdef LOCAL
-    fprintf(stderr, "\nRuntime: %.10fs\n", (double) (clock() - tStart) / CLOCKS_PER_SEC);
-#endif
     return 0 ;
 }
